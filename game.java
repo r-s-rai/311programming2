@@ -204,6 +204,8 @@ public class Main
 	   
 	   grudgetrackerone = "Cooperate";
 	   grudgetrackertwo = "Cooperate";
+	   lastactionone = "";
+	   lastactiontwo = "";
 	   
 	   int[][] fullpayoffs = new int[2][m];
 	   for (int u = 0; u<m; ++u)
@@ -323,4 +325,3 @@ public class Main
 	
 	
 }
-
