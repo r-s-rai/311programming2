@@ -1,4 +1,7 @@
-public class Main
+import java.io.*;
+
+
+public class newgame
 {
     public static String lastactionone = "";
     public static String lastactiontwo = "";
@@ -11,11 +14,41 @@ public class Main
 	
 	public static void Gamer(int n, int m, int p, int k)
 	{   
-	    
+            StringBuilder sb = new StringBuilder();
+            sb.append("Generation");
+            sb.append(',');
+            sb.append("Tit-4-Tat");
+            sb.append(',');
+            sb.append("Grudger");
+            sb.append(',');
+            sb.append("Always Cooperate");
+            sb.append(',');
+            sb.append("Always Defect");
+            sb.append(',');
+            sb.append("Tit-4-Tat");
+            sb.append(',');
+            sb.append("Grudger");
+            sb.append(',');
+            sb.append("Always Cooperate");
+            sb.append(',');
+            sb.append("Always Defect");
+            sb.append(',');
+            sb.append("Total");
+            sb.append(',');
+	    sb.append("Tit-4-Tat");
+            sb.append(',');
+            sb.append("Grudger");
+            sb.append(',');
+            sb.append("Always Cooperate");
+            sb.append(',');
+            sb.append("Always Defect");
+            sb.append(',');
+            sb.append('\n');
+        	    
 	    char[] players = new char[n];
 	        for (int i = 0; i<n; ++i)
 	        {
-	            if (i <n/4)
+	            if (i <n/4)                    
 	            {
 	                players[i] = 'T';
 	            }
@@ -121,14 +154,45 @@ public class Main
 	        System.out.println("Gen " + v + ": T4T: " + percentt + "%  G: " + percentg + "%  AC: " + percentc + "%  AD: " + percentd + "%");
 	        System.out.println("Gen " + v + ": T4T: " + tftpoints + " G: " + gpoints + " AC: " + cpoints + " AD: " + dpoints + " Total: " + genpoints);
 	        System.out.println("Gen " + v + ": T4T: " + tftaverage + " G: " + gaverage + " AC: " + caverage + " AD: " + daverage);
+
+                sb.append(String.valueOf(v));
+                sb.append(',');
+                sb.append(String.valueOf(percentt));
+                sb.append(',');
+                sb.append(String.valueOf(percentg));
+                sb.append(',');
+                sb.append(String.valueOf(percentc));
+                sb.append(',');
+                sb.append(String.valueOf(percentd));
+                sb.append(',');
+                sb.append(String.valueOf(tftpoints));
+                sb.append(',');
+                sb.append(String.valueOf(gpoints));
+                sb.append(',');
+                sb.append(String.valueOf(cpoints));
+                sb.append(',');
+                sb.append(String.valueOf(dpoints));
+                sb.append(',');
+                sb.append(String.valueOf(genpoints));
+                sb.append(',');
+	        sb.append(String.valueOf(tftaverage));
+                sb.append(',');
+                sb.append(String.valueOf(gaverage));
+                sb.append(',');
+                sb.append(String.valueOf(caverage));
+                sb.append(',');
+                sb.append(String.valueOf(daverage));
+                sb.append(',');
+                sb.append('\n');    
 	        
 	        System.out.println("");
 	        for(int z = 0; z<n; ++z)
 	        {
 	            
 	            System.out.print(" "+pointtotals[z]);
-	        }
-	        
+	        }	
+
+
 	        /* Need to take out bottom p% of players from the array here and replace them with a copy of the top p% of players*/
 	        int takeout = p*n/100;
 	        
@@ -139,6 +203,8 @@ public class Main
 	        {
 	           int tempvar = 100000000;
 	           int tempchar = -1;
+                   int[] tr = new int[n];
+                   int trtracker = 0;
 	           for (int f =0; f<n; ++f)
 	           {
 	               if (pointtotals[f] != -1)
@@ -147,11 +213,21 @@ public class Main
 	                   {
 	                       tempchar = f;  
 	                       tempvar = pointtotals[f];
+	                       tr = new int[n];
+	                       trtracker=0;
+                               tr[0] = f;
+                               ++trtracker; 
 	                   }
+
+                           else if(pointtotals[f] == tempvar)
+                           {
+                               tr[trtracker] = f; 
+                               ++trtracker;
+			               }
 	               }
 	           }
-	           
-	           poptotakeout[g] = tempchar;
+	           int index = (int)(Math.random() * trtracker);
+	           poptotakeout[g] = tr[index]; /* tempchar */
 	           pointtotals[tempchar] = -1;
 	            
 	        }
@@ -161,6 +237,8 @@ public class Main
 	        {
 	           int tempvar = pointtotals[0];
 	           int tempchar = 0;
+                   int[] tr = new int[n];
+                   int trtracker = 0;
 	           for (int f =0; f<n; ++f)
 	           {
 	               if (pointtotals[f] != -1)
@@ -169,11 +247,22 @@ public class Main
 	                   {
 	                       tempchar = f;  
 	                       tempvar = pointtotals[f];
+	                       tr = new int[n];
+	                       trtracker=0;
+                               tr[0] = f;
+                               ++trtracker; 
 	                   }
+
+                           else if(pointtotals[f] == tempvar)
+                           {
+                               tr[trtracker] = f; 
+                               ++trtracker;
+			   }
 	               }
 	           }
 	           
-	           poptocopy[g] = tempchar;
+                   int index = (int)(Math.random() * trtracker);
+	           poptocopy[g] = tr[index]; /* tempchar */
 	        
 	           pointtotals[tempchar] = -1;
 	            
@@ -183,9 +272,21 @@ public class Main
 	        {
 	            players[poptotakeout[g]] = players[poptocopy[g]];
 	        }
+
+
 	        
 	     }
 	    
+             try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+
+              writer.write(sb.toString());
+
+              System.out.println("done!");
+
+             } 
+             catch (FileNotFoundException e) {
+               System.out.println(e.getMessage());
+             } 
 	    
 	}
 	
@@ -204,8 +305,8 @@ public class Main
 	   
 	   grudgetrackerone = "Cooperate";
 	   grudgetrackertwo = "Cooperate";
-	   lastactionone = "";
-	   lastactiontwo = "";
+           lastactionone = "";
+           lastactiontwo = "";
 	   
 	   int[][] fullpayoffs = new int[2][m];
 	   for (int u = 0; u<m; ++u)
