@@ -1,7 +1,7 @@
 import java.io.*;
 
 
-public class newgame
+public class gamedistributionthree
 {
     public static String lastactionone = "";
     public static String lastactiontwo = "";
