@@ -237,7 +237,7 @@ public class gamedistributiontwo
 	           }
 	           int index = (int)(Math.random() * trtracker);
 	           poptotakeout[g] = tr[index]; /* tempchar */
-	           pointtotals[tempchar] = -1;
+	           pointtotals[tr[index]] = -1;
 	            
 	        }
 	        
@@ -273,7 +273,7 @@ public class gamedistributiontwo
                    int index = (int)(Math.random() * trtracker);
 	           poptocopy[g] = tr[index]; /* tempchar */
 	        
-	           pointtotals[tempchar] = -1;
+	           pointtotals[tr[index]] = -1;
 	            
 	        }
 	        
