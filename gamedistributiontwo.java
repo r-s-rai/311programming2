@@ -85,7 +85,7 @@ public class gamedistributiontwo
 	                for (int vv =0; vv<m; ++vv)
 	                {
 	                    pointtotals[a] = pointtotals[a] + points[0][vv];
-	                    pointtotals[b] = pointtotals[b] + points[0][vv];
+	                    pointtotals[b] = pointtotals[b] + points[1][vv];
 	                }
 	            }
 	        }
